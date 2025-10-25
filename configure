@@ -2284,7 +2284,7 @@ $as_echo "ok (TEA ${TEA_VERSION})" >&6; }
 	esac
     fi
     case "`uname -s`" in
-	*win32*|*WIN32*|*MINGW32_*)
+	*win32*|*WIN32*|*MINGW32_*|*MINGW64_*)
 	    compile_for_windows="yes"
 	    ;;
     esac
@@ -6218,8 +6218,7 @@ if test "${TEA_PLATFORM}" = "windows" ; then
 
 
 
-
-    vars="gdi32.lib user32.lib"
+	vars="gdi32.lib user32.lib UxTheme.lib"
     for i in $vars; do
 	if test "${TEA_PLATFORM}" = "windows" -a "$GCC" = "yes" ; then
 	    # Convert foo.lib to -lfoo for GCC.  No-op if not *.lib
@@ -6321,7 +6320,7 @@ $as_echo_n "checking for Windows native path bug in windres... " >&6; }
   test $ac_status = 0; }; } ; then
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
 $as_echo "no" >&6; }
-		RC_DEPARG='"$(shell $(CYGPATH) $<)"'
+		RC_DEPARG='"$<"'
 	    else
 		{ $as_echo "$as_me:${as_lineno-$LINENO}: result: yes" >&5
 $as_echo "yes" >&6; }
